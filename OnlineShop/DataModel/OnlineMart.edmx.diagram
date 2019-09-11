@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="90af5f49a182443d8f8ef6340af2ce6d" Name="Diagram1">
+        <EntityTypeShape EntityType="DataModel.Cart" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.CartItem" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.Category" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.City" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.Product" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.State" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.User" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="DataModel.fk_cart_cart_items" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.fk_users_cart" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.fk_products_cart_items" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.fk_categories_product" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.fk_states_cities" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.fk_users_cities" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.fk_states_users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
