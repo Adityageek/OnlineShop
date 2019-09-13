@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="DataModel.City" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DataModel.Product" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DataModel.State" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataModel.User" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.User" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="DataModel.fk_cart_cart_items" ManuallyRouted="false" />
         <AssociationConnector Association="DataModel.fk_users_cart" ManuallyRouted="false" />
         <AssociationConnector Association="DataModel.fk_products_cart_items" ManuallyRouted="false" />

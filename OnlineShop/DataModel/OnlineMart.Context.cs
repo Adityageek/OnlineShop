@@ -12,6 +12,8 @@ namespace OnlineShop.DataModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class OnlineMartEntities : DbContext
     {
@@ -32,5 +34,18 @@ namespace OnlineShop.DataModel
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<User> Users { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> ValidUser(string userName, string password)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ValidUser", userNameParameter, passwordParameter);
+        }
     }
 }

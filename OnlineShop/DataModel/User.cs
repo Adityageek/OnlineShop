@@ -7,30 +7,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
-public partial class User
+namespace OnlineShop.DataModel
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public User()
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class User
     {
-        this.Carts = new HashSet<Cart>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Carts = new HashSet<Cart>();
+        }
+    
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public string Gender { get; set; }
+        public string Contact { get; set; }
+        public string Address { get; set; }
+        public Nullable<int> CityId { get; set; }
+        public int StateId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual City City { get; set; }
+        public virtual State State { get; set; }
     }
-
-    public int UserId { get; set; }
-    public string UserName { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public Nullable<System.DateTime> DateOfBirth { get; set; }
-    public string Gender { get; set; }
-    public string Contact { get; set; }
-    public string Address { get; set; }
-    public Nullable<int> CityId { get; set; }
-    public int StateId { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<Cart> Carts { get; set; }
-    public virtual City City { get; set; }
-    public virtual State State { get; set; }
 }

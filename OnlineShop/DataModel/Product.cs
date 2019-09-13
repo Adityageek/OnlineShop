@@ -7,27 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
-public partial class Product
+namespace OnlineShop.DataModel
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Product()
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Product
     {
-        this.CartItems = new HashSet<CartItem>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.CartItems = new HashSet<CartItem>();
+        }
+    
+        public int ProductId { get; set; }
+        public string ProductTitle { get; set; }
+        public System.DateTime LaunchDate { get; set; }
+        public int Quantity { get; set; }
+        public double Mrp { get; set; }
+        public int Discount { get; set; }
+        public int CategoryId { get; set; }
+        public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartItem> CartItems { get; set; }
+        public virtual Category Category { get; set; }
     }
-
-    public int ProductId { get; set; }
-    public string ProductTitle { get; set; }
-    public System.DateTime LaunchDate { get; set; }
-    public int Quantity { get; set; }
-    public double Mrp { get; set; }
-    public int Discount { get; set; }
-    public int CategoryId { get; set; }
-    public string Description { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<CartItem> CartItems { get; set; }
-    public virtual Category Category { get; set; }
 }

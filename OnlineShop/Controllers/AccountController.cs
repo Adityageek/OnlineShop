@@ -3,6 +3,7 @@ using OnlineShop.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace OnlineShop.Controllers
 {
@@ -87,12 +88,34 @@ namespace OnlineShop.Controllers
         //Login Method
         [HttpGet]
         public ActionResult Login() {
-            return View();
+            RegisterViewModel registerModel = new RegisterViewModel();
+            return View(registerModel);
         }
 
         [HttpPost]
-        public ActionResult Login(RegisterViewModel model) {
-            
+        public ActionResult Login(LoginViewModel model) {
+            if (ModelState.IsValid)
+            {
+                OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
+                var user = (from userlist in onlineMartEntities.Users
+                            where userlist.UserName == model.UserName && userlist.Password == model.Password
+                            select new
+                            {
+                                userlist.UserId,
+                                userlist.UserName
+                            }).ToList();
+
+                if (user.FirstOrDefault() != null)
+                {
+                    Session["UserName"] = user.FirstOrDefault().UserName;
+                    Session["UserId"] = user.FirstOrDefault().UserId;
+                    return Redirect("Welcome");
+                }
+
+                else {
+                    ModelState.AddModelError("", "Invalid Login Credentials");
+                }
+            }
 
             return View();
         }

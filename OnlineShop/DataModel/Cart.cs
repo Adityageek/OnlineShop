@@ -7,23 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
-public partial class Cart
+namespace OnlineShop.DataModel
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Cart()
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Cart
     {
-        this.CartItems = new HashSet<CartItem>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cart()
+        {
+            this.CartItems = new HashSet<CartItem>();
+        }
+    
+        public int CartId { get; set; }
+        public int UserId { get; set; }
+        public byte[] CartTime { get; set; }
+        public int ItemsAdded { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartItem> CartItems { get; set; }
+        public virtual User User { get; set; }
     }
-
-    public int CartId { get; set; }
-    public int UserId { get; set; }
-    public byte[] CartTime { get; set; }
-    public int ItemsAdded { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<CartItem> CartItems { get; set; }
-    public virtual User User { get; set; }
 }

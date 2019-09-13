@@ -7,22 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
-public partial class City
+namespace OnlineShop.DataModel
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public City()
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class City
     {
-        this.Users = new HashSet<User>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public City()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
+        public int CityId { get; set; }
+        public string City1 { get; set; }
+        public int StateId { get; set; }
+    
+        public virtual State State { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
-
-    public int CityId { get; set; }
-    public string City1 { get; set; }
-    public int StateId { get; set; }
-
-    public virtual State State { get; set; }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-    public virtual ICollection<User> Users { get; set; }
 }

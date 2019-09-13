@@ -214,5 +214,9 @@
       <End Role="State" EntitySet="States" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <FunctionImport Name="ValidUser" ReturnType="Collection(Int32)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>
