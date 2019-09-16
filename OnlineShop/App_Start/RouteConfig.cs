@@ -16,14 +16,10 @@ namespace OnlineShop
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional }
+                defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "Login",
-                url: "{ controller/}/{action}/{id}",
-                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
-                );
+           
         }
     }
 }

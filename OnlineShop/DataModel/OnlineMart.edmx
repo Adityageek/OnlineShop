@@ -50,6 +50,7 @@
           <Property Name="Discount" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -268,6 +269,7 @@
           <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CartItems" Relationship="Self.fk_products_cart_items" FromRole="Product" ToRole="CartItem" />
           <NavigationProperty Name="Category" Relationship="Self.fk_categories_product" FromRole="Product" ToRole="Category" />
+          <Property Name="ImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -479,6 +481,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DataModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
                 <ScalarProperty Name="LaunchDate" ColumnName="LaunchDate" />

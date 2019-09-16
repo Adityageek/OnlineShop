@@ -11,7 +11,8 @@ namespace OnlineShop.DataModel
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,9 +29,13 @@ namespace OnlineShop.DataModel
         public int Discount { get; set; }
         public int CategoryId { get; set; }
         public string Description { get; set; }
+        public string ImagePath { get; set; }
+       
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual Category Category { get; set; }
+
+        public IEnumerable<Category> Categories { get; set; }
     }
 }

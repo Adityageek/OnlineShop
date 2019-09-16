@@ -15,6 +15,7 @@ namespace OnlineShop.ViewModels
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Enter Password")]
+        [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*\d).{4,8}$", ErrorMessage = "Password must be 4 to 8 characters long and contains one number")]
         public string Password { get; set; }
     }

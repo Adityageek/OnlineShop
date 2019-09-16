@@ -24,12 +24,7 @@ function NewViewModel(viewModel) {
                     debugger;
                     console.log(data.city);
                     viewModel.City(data.city);
-                    //$.each(data.city, function (i, city) {
-
-                    //    $("#CityId").append('<option value="'
-                    //                               + city.Value + '">'
-                    //                         + city.Text + '</option>');
-                    //});
+                   
                 },
                 error: function (ex) {
                     alert('Failed.' + ex);

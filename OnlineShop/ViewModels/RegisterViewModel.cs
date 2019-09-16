@@ -9,9 +9,9 @@ namespace OnlineShop.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Enter User Name")]
+        [Required]
         [StringLength(10, MinimumLength = 5)]
-        [RegularExpression(@"(\S\D)+", ErrorMessage = " Space and numbers not allowed")]
+        [RegularExpression(@"(\S\D)+", ErrorMessage = " Enter User Name without spaces and numbers")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Enter Email")]

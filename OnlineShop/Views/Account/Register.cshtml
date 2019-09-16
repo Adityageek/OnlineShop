@@ -4,16 +4,8 @@
 @{
     ViewBag.Title = "Register";
 }
-
-
-<script src="~/Scripts/jquery-3.4.1.js"></script>
-@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>*@
-<script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/knockout-3.5.0.js"></script>
 <script src="~/Scripts/knockout.mapping-latest.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Views/Account/Register.js"></script>
 <h2>Register</h2>
 @using (Html.BeginForm())
@@ -23,7 +15,7 @@
         <label class="control-label col-2" for="UserName">User Name</label>
         <div class="col-md-10">
             @Html.EditorFor(m => m.UserName, new { @class = "form-control text-box single-line", data_bind = "value: UserName" })
-            @Html.ValidationMessageFor(m => m.UserName)
+            @Html.ValidationMessageFor(m => m.UserName,"", new { @style = "color:red" })
         </div>
     </div>
 
@@ -32,7 +24,7 @@
         <div class="col-md-10">
             @*<input class="form-control text-box single-line" id="Email" name="Email" type="email" value="" data-bind="value: Email" />*@
             @Html.EditorFor(m => m.Email, new { @class = "form-control text-box single-line", data_bind = "Email" })
-            @Html.ValidationMessageFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email, "", new { @style = "color:red" })
         </div>
     </div>
 
@@ -40,7 +32,7 @@
         <label class="control-label col-2" for="Password">Password</label>
         <div class="col-md-10">
            @Html.PasswordFor(m => m.Password, new { data_bind = "Password" })
-           @Html.ValidationMessageFor(m => m.Password)
+           @Html.ValidationMessageFor(m => m.Password, "", new { @style = "color:red" })
         </div>
     </div>
 
@@ -49,7 +41,7 @@
         <label class="control-label col-2" for="DateOfBirth">Date Of Birth</label>
         <div class="col-md-10">
            @Html.EditorFor(m => m.DateOfBirth, new { @class = "form-control text-box single-line", data_bind = "DataOfBirth" })
-           @Html.ValidationMessageFor(m=> m.DateOfBirth)
+           @Html.ValidationMessageFor(m=> m.DateOfBirth, "", new { @style = "color:red" })
         </div>
     </div>
 
@@ -61,7 +53,7 @@
            @Html.Label("Male")
            @Html.RadioButtonFor(m => m.Gender, "F", new {  data_bind = "Gender" })
            @Html.Label("Female")
-           @Html.ValidationMessageFor(m=> m.Gender)
+           @Html.ValidationMessageFor(m=> m.Gender, "", new { @style = "color:red" })
 
         </div>
     </div>
@@ -71,7 +63,7 @@
         <label class="control-label col-2" for="Contact">Contact</label>
         <div class="col-md-10">
             @Html.EditorFor(m=>m.Contact, new { @class = "form-control text-box single-line", data_bind = "Contact" })
-            @Html.ValidationMessageFor(m=> m.Contact)
+            @Html.ValidationMessageFor(m=> m.Contact, "", new { @style = "color:red" })
         </div>
     </div>
 
@@ -80,87 +72,41 @@
         <label class="control-label col-2" for="Address">Address</label>
         <div class="col-md-10">
            @Html.EditorFor(m=> m.Address, new {@class = "form-control text-box single-line", data_bind = "Address" })
-           @Html.ValidationMessageFor(m => m.Address)
+           @Html.ValidationMessageFor(m => m.Address, "", new { @style = "color:red" })
         </div>
     </div>
 
     <div class="form-group">
-        <p>
-            <b>Select State :</b>
-            @Html.DropDownListFor(m => m.StateId, new SelectList(Model.States, "StateId", "State1", Model.StateId), "Please Select", new { @data_bind = "value: StateId, event:{ change: getCity()}" })
-            @Html.ValidationMessageFor(m=> m.StateId)
-        </p>
+       <label class="control-label col-2" for="StateId">State</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.StateId, new SelectList(Model.States, "StateId", "State1", Model.StateId), "Select State", new { @data_bind = "value: StateId, event:{ change: getCity()}" })
+            @Html.ValidationMessageFor(m => m.StateId, "", new { @style = "color:red" })
 
+        </div>
     </div>
 
 
     <div class="form-group">
-        <p>
-            <b>Select City :</b> <select name="CityId" data-bind="options: City,
-
+        <label class="control-label col-2" for="CityId">City</label>
+        <div class="col-md-10">
+            <select data-val-required="Please select City" name="CityId"  data-bind="options: City,
                              optionsText: 'Text',
                              optionsValue: 'Value',
-                             optionsCaption: 'Choose...'"></select>
-        </p>
-        @Html.ValidationMessageFor(m=> m.CityId)
+                             optionsCaption: 'Select City'"></select>
+            @Html.ValidationMessageFor(m => m.CityId, "", new { @style = "color:red" })
+        </div>
     </div>
 
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Register" class="btn btn-default">
+            <input type="submit" value="Register" class="btn-outline-dark">
         </div>
     </div>
 }
 <script type='text/javascript'>
-    //var states = @Html.Raw(Html.Encode(ViewBag.State));
+   
     var getCitiesUrl = '@Url.Action("getCity")';
-    @*var states = @Html.Raw(Html.Encode(ViewBag.State));
-    function AppViewModel() {
-        var self = this;
-        self.FullName = ko.observable();
-
-    }
-    //var appViewModel = new AppViewModel();
-    //var viewModel = new AppViewModel(ko.mapping.fromJS(Html.Raw(Json.Encode(Model))));
-
-    function NewViewModel(viewModel) {
-        viewModel.City = ko.observable();
-        viewModel.FullName1 = ko.observable();
-        //viewModel.Cities = ko.observableArray([]);
-        viewModel.StateId = ko.observable();
-        viewModel.Email.extend({ email: true });
-
-        viewModel.getCity = function () {
-            debugger;
-            if (viewModel.StateId()) {
-                console.log('hello' + viewModel.StateId);
-                //Call controller to get the list of cities using ajax
-                $.ajax({
-                    type: 'Get',
-                    url: '@Url.Action("getCity")',
-                    dataType: 'json',
-                    data: { id: viewModel.StateId() },
-                    success: function (data) {
-                        debugger;
-                        console.log(data.city);
-                        viewModel.City(data.city);
-                        //$.each(data.city, function (i, city) {
-
-                        //    $("#CityId").append('<option value="'
-                        //                               + city.Value + '">'
-                        //                         + city.Text + '</option>');
-                        //});
-                    },
-                    error: function (ex) {
-                        alert('Failed.' + ex);
-                    }
-                });
-
-            }
-        };
-    }
-        *@
     var viewModel = ko.mapping.fromJS(@Html.Raw(Json.Encode(Model)));
     NewViewModel(viewModel);
 
