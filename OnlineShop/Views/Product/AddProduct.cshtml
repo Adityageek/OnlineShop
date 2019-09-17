@@ -1,7 +1,90 @@
-﻿
+﻿@model OnlineShop.DataModel.Product
+
 @{
     ViewBag.Title = "AddProduct";
 }
 
 <h2>AddProduct</h2>
+<script type="text/javascript">
+    function fileCheck(obj) {
+        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+        }
+    }
+</script>
+
+@using (Html.BeginForm("AddProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+       @Html.LabelFor( m=>m.ProductTitle, new { @class = "control-label col-2" })
+        <div>
+            @Html.EditorFor(m => m.ProductTitle, new { @class = "form-control text-box single-line", data_bind = "value: ProductTitle" })
+            @Html.ValidationMessageFor(m => m.ProductTitle, "", new { @style = "color:red" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.LaunchDate, new { @class = "control-label col-2" })
+        <div>
+            @Html.EditorFor(m => m.LaunchDate, new { @class = "form-control text-box single-line", data_bind = "value: LaunchDate" })
+            @Html.ValidationMessageFor(m => m.LaunchDate, "", new { @style = "color:red" })
+         </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Quantity, new { @class = "control-label col-2" })
+        <div>
+            @Html.EditorFor(m => m.Quantity, new { @class = "form-control text-box single-line", data_bind = "value: Quantity" })
+            @Html.ValidationMessageFor(m => m.Quantity, "", new { @style = "color:red" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Mrp, new { @class = "control-label col-2" })
+        <div>
+            @Html.EditorFor(m => m.Mrp, new { @class = "form-control text-box single-line", data_bind = "value: Mrp" })
+            @Html.ValidationMessageFor(m => m.Mrp, "", new { @style = "color:red" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Discount, new { @class = "control-label col-2" })
+        <div>
+            @Html.EditorFor(m => m.Discount, new { @class = "form-control text-box single-line", data_bind = "value: Discount" })
+            @Html.ValidationMessageFor(m => m.Discount, "", new { @style = "color:red" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryId, new { @class = "control-label col-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "CategoryId", "Category1", Model.CategoryId), "Select Category", new { @data_bind = "value: CategoryId"  })
+            @Html.ValidationMessageFor(m => m.CategoryId, "", new { @style = "color:red" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "control-label col-2" })
+        <div>
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control text-area", data_bind = "value: Description" })
+            @Html.ValidationMessageFor(m => m.Description, "", new { @style = "color:red" })
+        </div>
+    </div>
+
+   <div class="form-group">
+       @Html.LabelFor(m=>m.Image, new { @class = "control-label col-2" })
+       <div>
+           <input type="file" name="ImageData"  data-bind="Image" onchange="fileCheck(this);"/>
+           @Html.ValidationMessageFor(m => m.Image, "", new { @style = "color:red" })
+       </div>
+   </div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Add Product" class="btn-outline-dark">
+    </div>
+</div>
+
+}
 

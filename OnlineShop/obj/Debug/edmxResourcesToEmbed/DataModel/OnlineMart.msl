@@ -41,6 +41,8 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="DataModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
           <ScalarProperty Name="LaunchDate" ColumnName="LaunchDate" />

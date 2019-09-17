@@ -249,6 +249,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Index\Index.cshtml" />
     <Content Include="Views\Product\AddProduct.cshtml" />
+    <Content Include="Views\Product\ViewProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

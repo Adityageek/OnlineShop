@@ -11,7 +11,9 @@ namespace OnlineShop.DataModel
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     public partial class Product
     {
@@ -22,20 +24,46 @@ namespace OnlineShop.DataModel
         }
     
         public int ProductId { get; set; }
+        [Display(Name= "Product Title")]
+        [Required(ErrorMessage ="Enter Product Title")]
         public string ProductTitle { get; set; }
+
+        [Display(Name = "Launch Date")]
+        [Required(ErrorMessage ="Enter Launch Date")]
+        [DataType(DataType.Date)]
         public System.DateTime LaunchDate { get; set; }
+
+        [Display(Name = "Quantity")]
+        [Required(ErrorMessage = "Enter Quantity")]
         public int Quantity { get; set; }
+
+        [Display(Name = "MRP")]
+        [Required(ErrorMessage ="Enter MRP")]
         public double Mrp { get; set; }
+
+        [Display(Name = "Discount")]
+        [Required(ErrorMessage = "Enter Discount")]
         public int Discount { get; set; }
+
+        [Display(Name = "Category")]
+        [Required(ErrorMessage = "Enter Category")]
         public int CategoryId { get; set; }
+
+        [Display(Name = "Description")]
+        [Required(ErrorMessage = "Enter Description")]
         public string Description { get; set; }
-        public string ImagePath { get; set; }
-       
+
+        [AllowHtml]
+        [Display(Name = "Image")]
+        [Required(ErrorMessage = "Please Select Image")]
+        public byte[] Image { get; set; }
+
+        public double sellingPrice;
+        public double SellingPrice { get { return sellingPrice; } set { sellingPrice = Mrp - (Mrp * Discount / 100); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual Category Category { get; set; }
-
         public IEnumerable<Category> Categories { get; set; }
     }
 }

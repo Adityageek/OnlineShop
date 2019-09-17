@@ -54,6 +54,8 @@
     <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="CartItems" Relationship="Self.fk_products_cart_items" FromRole="Product" ToRole="CartItem" />
     <NavigationProperty Name="Category" Relationship="Self.fk_categories_product" FromRole="Product" ToRole="Category" />
+    <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="SellingPrice" Type="Double" Nullable="false" />
   </EntityType>
   <EntityType Name="State">
     <Key>
@@ -214,9 +216,5 @@
       <End Role="State" EntitySet="States" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
-    <FunctionImport Name="ValidUser" ReturnType="Collection(Int32)">
-      <Parameter Name="UserName" Mode="In" Type="String" />
-      <Parameter Name="Password" Mode="In" Type="String" />
-    </FunctionImport>
   </EntityContainer>
 </Schema>

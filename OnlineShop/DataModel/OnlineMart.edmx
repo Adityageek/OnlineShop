@@ -50,7 +50,8 @@
           <Property Name="Discount" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="2000" Nullable="false" />
-          <Property Name="ImagePath" Type="varchar" MaxLength="1000" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="SellingPrice" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -170,10 +171,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
-          <Parameter Name="Password" Type="nvarchar" Mode="In" />
-        </Function>
         <EntityContainer Name="DataModelStoreContainer">
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CartItem" EntityType="Self.CartItem" Schema="dbo" store:Type="Tables" />
@@ -269,7 +266,8 @@
           <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CartItems" Relationship="Self.fk_products_cart_items" FromRole="Product" ToRole="CartItem" />
           <NavigationProperty Name="Category" Relationship="Self.fk_categories_product" FromRole="Product" ToRole="Category" />
-          <Property Name="ImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="SellingPrice" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -430,10 +428,6 @@
             <End Role="State" EntitySet="States" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <FunctionImport Name="ValidUser" ReturnType="Collection(Int32)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -481,7 +475,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DataModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductTitle" ColumnName="ProductTitle" />
                 <ScalarProperty Name="LaunchDate" ColumnName="LaunchDate" />
