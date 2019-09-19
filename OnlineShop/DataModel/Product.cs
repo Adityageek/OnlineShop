@@ -65,5 +65,6 @@ namespace OnlineShop.DataModel
         public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual Category Category { get; set; }
         public IEnumerable<Category> Categories { get; set; }
+        
     }
 }

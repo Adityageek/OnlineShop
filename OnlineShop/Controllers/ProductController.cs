@@ -75,6 +75,17 @@ namespace OnlineShop.Controllers
             imageBytes = reader.ReadBytes((int)image.ContentLength);
             return imageBytes;
         }
+
+        [HttpGet]
+        public ActionResult ViewProduct() {
+            OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
+            onlineMartEntities.Configuration.ProxyCreationEnabled = false;
+            List<Product> products = onlineMartEntities.Products.ToList();
+
+            return View(products);
+        }
+
+
     }
 
     

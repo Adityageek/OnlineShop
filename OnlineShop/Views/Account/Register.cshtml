@@ -14,7 +14,7 @@
     <div class="form-group">
         <label class="control-label col-2" for="UserName">User Name</label>
         <div class="col-md-10">
-            @Html.EditorFor(m => m.UserName, new { @class = "form-control text-box single-line", data_bind = "value: UserName" })
+            @Html.EditorFor(m => m.UserName, new { @class = "form-control text-box single-line", @data_bind = "value: UserName" })
             @Html.ValidationMessageFor(m => m.UserName,"", new { @style = "color:red" })
         </div>
     </div>
@@ -23,7 +23,7 @@
         <label class="control-label col-2" for="Email">Email</label>
         <div class="col-md-10">
             @*<input class="form-control text-box single-line" id="Email" name="Email" type="email" value="" data-bind="value: Email" />*@
-            @Html.EditorFor(m => m.Email, new { @class = "form-control text-box single-line", data_bind = "Email" })
+            @Html.EditorFor(m => m.Email, new { @class = "form-control text-box single-line", @data_bind = "value: Email, event: { blur: Blur}" })
             @Html.ValidationMessageFor(m => m.Email, "", new { @style = "color:red" })
         </div>
     </div>
@@ -110,7 +110,7 @@
     var viewModel = ko.mapping.fromJS(@Html.Raw(Json.Encode(Model)));
     NewViewModel(viewModel);
 
-    ko.applyBindings(viewModel);
+    var tryy= ko.applyBindings(viewModel);
 
 </script>
         

@@ -93,6 +93,8 @@ namespace OnlineShop.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+        
         public ActionResult Login(LoginViewModel model) {
             if (ModelState.IsValid)
             {

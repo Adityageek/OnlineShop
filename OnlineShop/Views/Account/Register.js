@@ -8,10 +8,18 @@ function NewViewModel(viewModel) {
     viewModel.City = ko.observable();
     viewModel.FullName1 = ko.observable();
     viewModel.StateId = ko.observable();
-    viewModel.Email.extend({ email: true });
-
+    viewModel.Email.extend({ required: true });
+   
+    viewModel.UserName.extend({ required: true });
+    
+    
+    $('#UserName').on('blur', function () {
+        var data = ko.dataFor(this);
+        if(data == null)
+            alert("Enter UserName")
+    })
     viewModel.getCity = function () {
-        debugger;
+        
         if (viewModel.StateId()) {
             console.log('hello' + viewModel.StateId);
             //Call controller to get the list of cities using ajax
@@ -21,7 +29,7 @@ function NewViewModel(viewModel) {
                 dataType: 'json',
                 data: { id: viewModel.StateId() },
                 success: function (data) {
-                    debugger;
+                    
                     console.log(data.city);
                     viewModel.City(data.city);
                    

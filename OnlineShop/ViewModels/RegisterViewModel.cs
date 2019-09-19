@@ -1,4 +1,5 @@
-﻿using OnlineShop.DataModel;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using OnlineShop.DataModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +15,7 @@ namespace OnlineShop.ViewModels
         [RegularExpression(@"(\S\D)+", ErrorMessage = " Enter User Name without spaces and numbers")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Enter Email")]
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
