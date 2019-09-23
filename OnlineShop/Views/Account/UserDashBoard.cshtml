@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "UserDashBoard";
+}
+
+<h2>UserDashBoard</h2>
+
+
+    
+
+@if (Session["UserName"] != null)
+{ <text>
+  <h1> @User.Identity.Name</h1> 
+    Welcome @Session["UserName"].ToString() </text>
+    @Html.ActionLink("Log Out", "LogOut", "Account")
+} 

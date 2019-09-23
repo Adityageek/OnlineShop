@@ -14,7 +14,7 @@ namespace OnlineShop.ViewModels
         
         [Required(ErrorMessage = "Enter User Name")]
         [StringLength(10, MinimumLength = 5)]
-        [RegularExpression(@"(\S\D)+", ErrorMessage = " Space and numbers not allowed")]
+        [RegularExpression(@"(\S\D)+", ErrorMessage = "Space and numbers not allowed")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Enter Password")]

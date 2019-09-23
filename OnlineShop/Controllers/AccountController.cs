@@ -1,7 +1,10 @@
 ﻿using OnlineShop.DataModel;
+using OnlineShop.Filter;
 using OnlineShop.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -87,13 +90,15 @@ namespace OnlineShop.Controllers
 
         //Login Method
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Login() {
-            RegisterViewModel registerModel = new RegisterViewModel();
-            return View(registerModel);
+            LoginViewModel loginModel = new LoginViewModel();
+            return View(loginModel);
         }
 
         [HttpPost]
-        [Authorize]
+        [AllowAnonymous]
+        //[Authorize]
         
         public ActionResult Login(LoginViewModel model) {
             if (ModelState.IsValid)
@@ -109,17 +114,45 @@ namespace OnlineShop.Controllers
 
                 if (user.FirstOrDefault() != null)
                 {
-                    Session["UserName"] = user.FirstOrDefault().UserName;
-                    Session["UserId"] = user.FirstOrDefault().UserId;
-                    return Redirect("Welcome");
+                    //Session["UserName"] = user.FirstOrDefault().UserName.ToString();
+                    //Session["UserId"] = user.FirstOrDefault().UserId.ToString();
+                    Session["UserId"] = Guid.NewGuid(); //Setting User Session 
+                    Session["UserName"] = Guid.NewGuid();
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
+                    return RedirectToAction("UserDashBoard");
                 }
 
                 else {
                     ModelState.AddModelError("", "Invalid Login Credentials");
+                    
                 }
+                
             }
+            return View(model);
 
-            return View();
+           
+        }
+
+        //[UserAuthenticationFilter]
+        [Authorize]
+        public ActionResult UserDashBoard()
+        {
+            if (Session["UserId"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            return RedirectToAction("Index", "Index");
         }
 
     }

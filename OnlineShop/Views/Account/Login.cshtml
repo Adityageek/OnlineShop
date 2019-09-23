@@ -1,4 +1,4 @@
-﻿@model OnlineShop.ViewModels.RegisterViewModel
+﻿@model OnlineShop.ViewModels.LoginViewModel
 
 @{
     ViewBag.Title = "Login";
@@ -11,7 +11,7 @@
     <div class="form-group">
         @Html.Label("User Name", new { @class  = "control-label col-2" })
         <div>
-         @Html.EditorFor(m => m.UserName, new { data_bind = "UserName"})
+         @Html.EditorFor(model => model.UserName, new { data_bind = "UserName"})
         @Html.ValidationMessageFor(m => m.UserName, "", new { style = "color:red"})
         </div>
     </div>
@@ -19,13 +19,16 @@
     <div  class="form-group">
         @Html.Label("Password", new { @class = "control-label col-2" })
         <div>
-            @Html.EditorFor(m=>m.Password, new { data_bind = "Password"})
+            @Html.EditorFor(model => model.Password, new { data_bind = "Password"})
             @Html.ValidationMessageFor(m=> m.Password, "", new { style = "color:red"})
         </div>
     </div>
 
     <div >
         <input type="submit" value="Login"/>
+    </div>
+    <div>
+        @Html.ValidationSummary()
     </div>
     
 }

@@ -455,6 +455,7 @@
     <Content Include="Views\Account\Welcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
@@ -495,6 +496,7 @@
     <Compile Include="DataModel\User.cs">
       <DependentUpon>OnlineMart.tt</DependentUpon>
     </Compile>
+    <Compile Include="Filter\UserAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -526,6 +528,7 @@
     <Content Include="Views\Index\Index.cshtml" />
     <Content Include="Views\Product\AddProduct.cshtml" />
     <Content Include="Views\Product\ViewProduct.cshtml" />
+    <Content Include="Views\Account\UserDashBoard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
