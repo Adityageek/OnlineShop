@@ -30,7 +30,7 @@ namespace OnlineShop.DataModel
 
         [Display(Name = "Launch Date")]
         [Required(ErrorMessage ="Enter Launch Date")]
-        [DataType(DataType.Date)]
+        
         public System.DateTime LaunchDate { get; set; }
 
         [Display(Name = "Quantity")]
@@ -65,6 +65,7 @@ namespace OnlineShop.DataModel
         public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual Category Category { get; set; }
         public IEnumerable<Category> Categories { get; set; }
-        
+
+
     }
 }

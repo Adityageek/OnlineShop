@@ -1,16 +1,21 @@
 ﻿using OnlineShop.DataModel;
+using OnlineShop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text;
 
 namespace OnlineShop.Controllers
 {
     public class ProductController : Controller
     {
+        public double SellingPrice { get; private set; }
+
         // GET: Product
         [HttpGet]
         public ActionResult AddProduct()
@@ -75,17 +80,54 @@ namespace OnlineShop.Controllers
             imageBytes = reader.ReadBytes((int)image.ContentLength);
             return imageBytes;
         }
-
-        [HttpGet]
-        public ActionResult ViewProduct() {
-            OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
-            onlineMartEntities.Configuration.ProxyCreationEnabled = false;
-            List<Product> products = onlineMartEntities.Products.ToList();
-
-            return View(products);
+        public Image byteArrayToImage(byte[] bytesArr)
+        {
+            using (MemoryStream memstr = new MemoryStream(bytesArr))
+            {
+                Image img = Image.FromStream(memstr);
+                return img;
+            }
         }
 
+        [HttpGet]
+        public ActionResult ViewProduct(ProductViewModel productModel)
+        {
+            OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
+           
+            return View();
+        }
+        //Retrieve and convert image to display it rn the uri is too long...
+        public JsonResult getProduct() {
+            OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
+            onlineMartEntities.Configuration.ProxyCreationEnabled = false;
+            var Products = onlineMartEntities.Products.ToList();
 
+            List<ProductViewModel> productList = new List<ProductViewModel>();
+
+            foreach (var product in Products)
+            {
+                string img = String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(product.Image));
+
+                var ProductsViewModel = new ProductViewModel
+                {
+                    ProductId = product.ProductId,
+                    ProductTitle = product.ProductTitle,
+                    LaunchDate = product.LaunchDate,
+                    Quantity = product.Quantity,
+                    Mrp = product.Mrp,
+                    Discount = product.Discount,
+                    CategoryId = product.CategoryId,
+                    Description = product.Description,
+                    Image = img,
+                    SellingPrice = product.SellingPrice
+                };
+                productList.Add(ProductsViewModel);
+            }
+
+            return Json(productList, JsonRequestBehavior.AllowGet);
+            
+
+        }
     }
 
     

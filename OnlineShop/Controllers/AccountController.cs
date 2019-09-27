@@ -21,7 +21,7 @@ namespace OnlineShop.Controllers
         {
             RegisterViewModel model = new RegisterViewModel();
             model.States = GetState();
-            ViewBag.States = GetState();
+            ViewBag.States   = GetState();
             return View(model);
         }
 

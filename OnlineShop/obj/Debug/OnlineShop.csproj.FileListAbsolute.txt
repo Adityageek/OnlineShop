@@ -51,6 +51,8 @@ D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Webpages.Deployment.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Webpages.Razor.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Helpers.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Mvc.xml
+D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csproj.CoreCompileInputs.cache
+D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csproj.CopyComplete
 D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.dll
 D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.pdb
-D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csprojResolveAssemblyReference.cache
+D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csprojAssemblyReference.cache

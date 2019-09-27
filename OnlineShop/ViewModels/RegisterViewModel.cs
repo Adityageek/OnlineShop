@@ -24,7 +24,7 @@ namespace OnlineShop.ViewModels
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Enter Date Of Birth")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         [ValidBirthDate(ErrorMessage = "Enter Birth Date in Range")]        
         public Nullable<System.DateTime> DateOfBirth { get; set; }
 
