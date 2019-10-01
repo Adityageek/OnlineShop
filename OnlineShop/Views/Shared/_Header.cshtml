@@ -1,6 +1,16 @@
 ﻿
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/knockout-3.5.0.js"></script>
+<script src="~/Scripts/knockout.mapping-latest.js"></script>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="Index">Online Mart</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,20 +20,49 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Categories</a>
+            <li class="nav-item" id="category">
+                
+                
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
+                <a class="nav-link" href="Product/ViewProduct">Products</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        
     </div>
 </nav>
+<script>
+    function () {
+       $.getJSON('Category/GetCategory', function (data){
+        var out = "";
+        var i;
+        for (i = 0; i < arr.length; i++) {
+            out += '<a href="' + arr[i].CategoryId + '">' +
+                arr[i].Category + '</a><br>';
+        }
+        document.getElementById("category").innerHTML = out;
+    }
+    //var GetCategory = ko.observableArray();
+    //getCategory = function () {
+    //    $.getJSON('Category/GetCategory', function (data) {r
+    //        var out=""
+    //        for (var i = 0; i < data.length; i++) {
+    //            out += '<a href="' + data[i].CategoryId + '">' + data[i].Category1 + '</a><br>';
+    //            ko.applyBindings(categoryModel, document.getElementById("category").innerHTML = out);
+    //        }
+    //    });
+    //}
+    //var CategoryModel = function () {
+    //    var self = this;
+    //    self.Category = ko.observable();
+    //}
+    //var categoryModel = new CategoryModel();
+    //$(document).ready(function () {
+    //    getCategory();
+    //    ko.applyBindings(categoryModel, document.getElementById("category").innerHTML= out);
+    //});
+</script>
 

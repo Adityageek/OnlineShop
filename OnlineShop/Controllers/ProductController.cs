@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text;
+using PagedList;
 
 namespace OnlineShop.Controllers
 {
@@ -90,10 +91,15 @@ namespace OnlineShop.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewProduct(ProductViewModel productModel)
+        public ActionResult ViewProduct(int? page)
         {
             OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
-           
+            onlineMartEntities.Configuration.ProxyCreationEnabled = false;
+            var Products = onlineMartEntities.Products.ToList();
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            var onePageOfProducts = Products.ToPagedList(pageNumber, 25); // will only contain 25 products max because of the pageSize
+
+            ViewBag.OnePageOfProducts = onePageOfProducts;
             return View();
         }
         //Retrieve and convert image to display it rn the uri is too long...

@@ -1,163 +1,174 @@
-﻿@model OnlineShop.ViewModels.ProductViewModel
+﻿@model IEnumerable<OnlineShop.ViewModels.ProductViewModel>
 
-@{
-    ViewBag.Title = "ViewProduct";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<script src="~/Scripts/knockout-3.5.0.js"></script>
-<script src="~/Scripts/knockout.mapping-latest.js"></script>
-
-<h2>ViewProduct</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p><body>
-    <div id="main">
-        <table class="table" id="myTable">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductTitle)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.LaunchDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Quantity)
-                    </th>
-                    <th>
-                            @Html.DisplayNameFor(model => model.Mrp)
+    @{
+        ViewBag.Title = "ViewProduct";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <script src="~/Scripts/knockout-3.5.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <h2>ViewProduct</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p><body>
+        <div id="main">
+            <table class="table" id="myTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductTitle)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Discount)
+                            @Html.DisplayNameFor(model => model.LaunchDate)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Description)
-                        </th>
-
-                        <th>
-                            @Html.DisplayNameFor(model => model.SellingPrice)
+                            @Html.DisplayNameFor(model => model.Quantity)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Category.Category1)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model=> model.Image)
-                        </th>
+                                @Html.DisplayNameFor(model => model.Mrp)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Discount)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
 
-                </tr>
-            </thead>
-            <tbody data-bind="foreach:ShowProduct">
-                <tr>
-                    <td data-bind="text:ProductTitle"></td>
-                    <td data-bind="text:LaunchDate"></td>
-                    <td data-bind="text:Quantity"></td>
-                    <td data-bind="text:Mrp"></td>
-                    <td data-bind="text:Discount"></td>
-                    <td data-bind="text:Description"></td>
-                    <td data-bind="text:SellingPrice"></td>
-                    <td data-bind="text:CategoryId"></td>
-                    <td ><img data-bind=" attr:{src:Image}"  /></td>
-                   
-                </tr>
-            </tbody>
-        </table>    
+                            <th>
+                                @Html.DisplayNameFor(model => model.SellingPrice)
+                            </th>
+                           
+                            <th>
+                                @Html.DisplayNameFor(model=> model.Image)
+                            </th>
+
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:ShowProduct">
+                    <tr>
+                        <td data-bind="text:ProductTitle"></td>
+                        <td data-bind="date:LaunchDate"></td>
+                        <td data-bind="text:Quantity"></td>
+                        <td data-bind="text:Mrp"></td>
+                        <td data-bind="text:Discount"></td>
+                        <td data-bind="text:Description"></td>
+                        <td data-bind="text:SellingPrice"></td>
+                        <td ><img data-bind=" attr:{src:Image}" width="100px" /></td>
+
+                    </tr>
+                </tbody>
+               
+            </table>
 
 
-    </div>
-    <script>
-        var ShowProduct = ko.observableArray();
-        getProduct = function () {
-             
-            $.getJSON('/Product/getProduct', function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    ShowProduct.push(data[i]);
-                }
-            });
-            
-        }
-        
-        var ShowModel = function () {
+        </div>
+        <script>
+            var ShowProduct = ko.observableArray();
+            getProduct = function () {
+                $.getJSON('/Product/getProduct', function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        
+                        ShowProduct.push(data[i]);
 
-            var self = this;
-            self.ProductTitle = ko.observable();
-            self.LaunchDate = ko.observable();
-            self.Quantity = ko.observable();
-            self.Mrp = ko.observable();
-            self.Discount = ko.observable();
-            self.Description = ko.observable();
-            self.SellingPrice = ko.observable();
-            self.CategoryId = ko.observable();
-             self.Image = ko.observable();
-            //self.x = ko.observable();
+                    }
+                });
+
             }
 
-        var showModel = new ShowModel();
-        $(document).ready(function () {
-            getProduct();
-            ko.applyBindings(showModel, document.getElementById("main"));
-        });
+            var ShowModel = function () {
+
+                var self = this;
+                self.ProductTitle = ko.observable();
+                self.LaunchDate = ko.observable();
+                self.Quantity = ko.observable();
+                self.Mrp = ko.observable();
+                self.Discount = ko.observable();
+                self.Description = ko.observable();
+                self.SellingPrice = ko.observable();
+                //self.CategoryId = ko.observable();
+                 self.Image = ko.observable();
+                //self.x = ko.observable();
+                }
+            ko.bindingHandlers.date = {
+                update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+                    var valueUnwrapped = ko.utils.unwrapObservable(valueAccessor());
+                    var textContent = moment(valueUnwrapped).format("DD/MM/YYYY");
+                    ko.bindingHandlers.text.update(element, function () { return textContent; });
+                }
+            };
+            var showModel = new ShowModel();
+            $(document).ready(function () {
+                getProduct();
+                ko.applyBindings(showModel, document.getElementById("main"));
+            });
 
 
-                    $("#myTable").dataTable();
-                     //$(function () {
+            //var table= $("#myTable").dataTable();
 
-                     //    $("#myTable").dataTable({
-                     //             "ajax": {
-                     //                 "url": "Product/ViewProduct"
-                     //             },
-                     //             columns: [
-                     //                 { data: ProductTitle },
-                     //                 { data: LaunchDate },
-                     //                 { data: Quantity },
-                     //                 { data: Mrp },
-                     //                 { data: Discount },
-                     //                 { data: CategoryId },
-                     //                 { data: Description },
-                     //                 {
-                     //                     data: Image, "aTargets": [0],
-                     //                     "render": function (data) {
-                     //                         return '<img src= "' + data + '"/>';
-                     //                     }
-                     //                 },
-                     //                 { data: SellingPrice}
-                     //             ]
-                     //         });
-                     //     })
-                     //$(document).ready(function ({
-                     //    GetProduct();
-                     //})
+            //$('#myTable_filter').on('keyup', function () {
+            //    table
+            //        .search(this.value)
+            //        .draw();
+            //});
+                         //$(function () {
 
-                     //var GetProduct = function () {
-                     //    $.ajax({
-                     //        type: "Get",
-                     //        url: "/Product/ViewProduct",
-                     //        success: function (response) {
-                     //            BindDataTable(response);
-                     //        }
-                     //    })
-                     //}
+                         //    $("#myTable").dataTable({
+                         //             "ajax": {
+                         //                 "url": "Product/ViewProduct"
+                         //             },
+                         //             columns: [
+                         //                 { data: ProductTitle },
+                         //                 { data: LaunchDate },
+                         //                 { data: Quantity },
+                         //                 { data: Mrp },
+                         //                 { data: Discount },
+                         //                 { data: CategoryId },
+                         //                 { data: Description },
+                         //                 {
+                         //                     data: Image, "aTargets": [0],
+                         //                     "render": function (data) {
+                         //                         return '<img src= "' + data + '"/>';
+                         //                     }
+                         //                 },
+                         //                 { data: SellingPrice}
+                         //             ]
+                         //         });
+                         //     })
+                         //$(document).ready(function ({
+                         //    GetProduct();
+                         //})
 
-                     //var BindDataTable = function (response) {
-                     //    $("#myTable").DataTable({
-                     //        "aaData": response,
-                     //        "aoColumns": [
-                     //                 { "mData": "ProductTitle" },
-                     //                { "mData": "LaunchDate" },
-                     //                { "mData": "Quantity" },
-                     //                { "mData": "Mrp" },
-                     //                { "mData": "Discount" },
-                     //                { "mData": "CategoryId" },
-                     //                { "mData": "Description" },
-                     //            {
-                     //                "mData": "Image", "aTargets": [0],
-                     //                "render": function (data) {
-                     //                    return '<img src= "' + data + '"/>';
-                     //                }
-                     //            },
-                     //                {"mData": "SellingPrice"}
-                     //             ]
+                         //var GetProduct = function () {
+                         //    $.ajax({
+                         //        type: "Get",
+                         //        url: "/Product/ViewProduct",
+                         //        success: function (response) {
+                         //            BindDataTable(response);
+                         //        }
+                         //    })
+                         //}
 
-                     //    })
-                    // }
-    </script>
-</body>
+                         //var BindDataTable = function (response) {
+                         //    $("#myTable").DataTable({
+                         //        "aaData": response,
+                         //        "aoColumns": [
+                         //                 { "mData": "ProductTitle" },
+                         //                { "mData": "LaunchDate" },
+                         //                { "mData": "Quantity" },
+                         //                { "mData": "Mrp" },
+                         //                { "mData": "Discount" },
+                         //                { "mData": "CategoryId" },
+                         //                { "mData": "Description" },
+                         //            {
+                         //                "mData": "Image", "aTargets": [0],
+                         //                "render": function (data) {
+                         //                    return '<img src= "' + data + '"/>';
+                         //                }
+                         //            },
+                         //                {"mData": "SellingPrice"}
+                         //             ]
+
+                         //    })
+                        // }
+        </script>
+    </body>

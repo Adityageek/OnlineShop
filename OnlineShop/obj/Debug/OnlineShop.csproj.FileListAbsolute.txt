@@ -27,6 +27,8 @@ D:\Online_Shopping\OnlineShop\OnlineShop\bin\Microsoft.Owin.Security.OAuth.dll
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\Microsoft.Web.Infrastructure.dll
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\Newtonsoft.Json.dll
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\Owin.dll
+D:\Online_Shopping\OnlineShop\OnlineShop\bin\PagedList.dll
+D:\Online_Shopping\OnlineShop\OnlineShop\bin\PagedList.Mvc.dll
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Helpers.dll
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Mvc.dll
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Razor.dll
@@ -45,6 +47,8 @@ D:\Online_Shopping\OnlineShop\OnlineShop\bin\Microsoft.Owin.Security.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\Microsoft.Owin.Security.Cookies.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\Newtonsoft.Json.xml
+D:\Online_Shopping\OnlineShop\OnlineShop\bin\PagedList.xml
+D:\Online_Shopping\OnlineShop\OnlineShop\bin\PagedList.Mvc.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Razor.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Webpages.xml
 D:\Online_Shopping\OnlineShop\OnlineShop\bin\System.Web.Webpages.Deployment.xml
@@ -55,4 +59,3 @@ D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csproj.CoreCompile
 D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csproj.CopyComplete
 D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.dll
 D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.pdb
-D:\Online_Shopping\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csprojAssemblyReference.cache
