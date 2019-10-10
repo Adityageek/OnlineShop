@@ -46,14 +46,10 @@ namespace OnlineShop.ViewModels
         [Required(ErrorMessage = "Please Select Image")]
         public String Image { get; set; }
 
-        public double sellingPrice { get; set; }
-        public double SellingPrice { get; internal set; }
+        public double SellingPrice { get; set; }
 
         public virtual Category Category { get; set; }
 
-        public static explicit operator ProductViewModel(List<Product> v)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

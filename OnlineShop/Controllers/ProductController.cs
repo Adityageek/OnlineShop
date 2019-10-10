@@ -1,5 +1,5 @@
 ﻿using OnlineShop.DataModel;
-using OnlineShop.ViewModels;
+
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Text;
 using PagedList;
+using OnlineShop.ViewModels;
 
 namespace OnlineShop.Controllers
 {
@@ -74,6 +75,14 @@ namespace OnlineShop.Controllers
             }
         }
 
+        //public ActionResult UpdateProduct(int productId)
+        //{
+        //    ProductDetail pd = _unitOfWork.GetRepositoryInstance<Tbl_Product>().GetListByParameter(i => i.ProductId == productId).Select(j => new ProductDetail { CategoryId = j.CategoryId, Description = j.Description, IsActive = j.IsActive ?? default(bool), Price = j.Price ?? default(decimal), ProductId = j.ProductId, ProductImage = j.ProductImage, ProductName = j.ProductName, IsFeatured = j.IsFeatured ?? default(bool) }).FirstOrDefault();
+        //    pd = pd != null ? pd : new ProductDetail();
+        //    pd.Categories = new SelectList(_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecordsIQueryable(), "CategoryId", "CategoryName");
+        //    return View("UpdateProduct", pd);
+        //}
+
         public byte[] ConvertToBytes(HttpPostedFileBase image)
         {
             byte[] imageBytes = null;
@@ -93,22 +102,19 @@ namespace OnlineShop.Controllers
         [HttpGet]
         public ActionResult ViewProduct(int? page)
         {
-            OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
-            onlineMartEntities.Configuration.ProxyCreationEnabled = false;
-            var Products = onlineMartEntities.Products.ToList();
-            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfProducts = Products.ToPagedList(pageNumber, 25); // will only contain 25 products max because of the pageSize
-
-            ViewBag.OnePageOfProducts = onePageOfProducts;
+            //OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
+            //onlineMartEntities.Configuration.ProxyCreationEnabled = false;
+            //var Products = onlineMartEntities.Products.ToList();
+       
             return View();
         }
-        //Retrieve and convert image to display it rn the uri is too long...
+       
         public JsonResult getProduct() {
             OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
             onlineMartEntities.Configuration.ProxyCreationEnabled = false;
             var Products = onlineMartEntities.Products.ToList();
 
-            List<ProductViewModel> productList = new List<ProductViewModel>();
+            List<ViewModels.ProductViewModel> productList = new List<ViewModels.ProductViewModel>();
 
             foreach (var product in Products)
             {

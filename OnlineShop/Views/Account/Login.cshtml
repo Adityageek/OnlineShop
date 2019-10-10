@@ -26,6 +26,8 @@
 
     <div >
         <input type="submit" value="Login"/>
+
+        @Html.HiddenFor(m=> m.ReturnUrl)
     </div>
     <div>
         @Html.ValidationSummary()

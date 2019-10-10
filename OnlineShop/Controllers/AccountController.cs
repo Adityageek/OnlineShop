@@ -1,5 +1,4 @@
 ﻿using OnlineShop.DataModel;
-using OnlineShop.Filter;
 using OnlineShop.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,7 @@ namespace OnlineShop.Controllers
         {
             RegisterViewModel model = new RegisterViewModel();
             model.States = GetState();
-            ViewBag.States   = GetState();
+            ViewBag.States = GetState();
             return View(model);
         }
 
@@ -62,7 +61,7 @@ namespace OnlineShop.Controllers
 
             return View();
         }
-        
+
         public IEnumerable<State> GetState()
         {
             OnlineMartEntities ome = new OnlineMartEntities();
@@ -91,19 +90,27 @@ namespace OnlineShop.Controllers
         //Login Method
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Login() {
-            LoginViewModel loginModel = new LoginViewModel();
+        public ActionResult Login(string returnUrl)
+        {
+
+            LoginViewModel loginModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl
+            };
             return View(loginModel);
         }
 
         [HttpPost]
         [AllowAnonymous]
         //[Authorize]
-        
-        public ActionResult Login(LoginViewModel model) {
+
+        public ActionResult Login(LoginViewModel model)
+        {
             if (ModelState.IsValid)
             {
                 OnlineMartEntities onlineMartEntities = new OnlineMartEntities();
+
+                //Todo:: Need to make password check case sensitive
                 var user = (from userlist in onlineMartEntities.Users
                             where userlist.UserName == model.UserName && userlist.Password == model.Password
                             select new
@@ -112,6 +119,7 @@ namespace OnlineShop.Controllers
                                 userlist.UserName
                             }).ToList();
 
+
                 if (user.FirstOrDefault() != null)
                 {
                     //Session["UserName"] = user.FirstOrDefault().UserName.ToString();
@@ -119,32 +127,41 @@ namespace OnlineShop.Controllers
                     Session["UserId"] = Guid.NewGuid(); //Setting User Session 
                     Session["UserName"] = Guid.NewGuid();
                     FormsAuthentication.SetAuthCookie(model.UserName, false);
-                    return RedirectToAction("UserDashBoard");
+
+                    if (!string.IsNullOrEmpty(model.ReturnUrl))
+                    {
+                        if(Url.IsLocalUrl(model.ReturnUrl))
+                        {
+                            return Redirect(model.ReturnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("UserDashBoard");
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("UserDashBoard");
+                    }
                 }
 
-                else {
+                else
+                {
                     ModelState.AddModelError("", "Invalid Login Credentials");
-                    
+
                 }
-                
+
             }
             return View(model);
 
-           
+
         }
 
         //[UserAuthenticationFilter]
         [Authorize]
         public ActionResult UserDashBoard()
         {
-            if (Session["UserId"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
+            return View();
         }
 
         public ActionResult LogOut()
